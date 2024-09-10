@@ -36,22 +36,24 @@ public class Counter {
     public void run() {
 
         do {
-
-            /*TODO#4 1초 간격 으로 count++ 됩니다.
+            try {
+                /*TODO#4 1초 간격 으로 count++ 됩니다.
               Thread.sleep method를 사용하세요.
               https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Thread.html#sleep(java.time.Duration)
             */
-            count++;
-            Thread.sleep(1000);
+                count++;
+                Thread.sleep(1000);
 
-            /*TODO#5 count 출력
+                /*TODO#5 count 출력
                 name:{Thread name}, count:{count 변수}
                 Thread name : Thread.currentThread().getName();
                 ex) name:my-thread, count:1
              */
-            log.info("name:{}, count:{}", Thread.currentThread().getName(), count);
-
-
+                log.info("name:{}, count:{}", Thread.currentThread().getName(), count);
+            }catch (InterruptedException e) {
+                log.error("스레드가 인터럽트 되었습니다.", e);
+                Thread.currentThread().interrupt();
+            }
 
         }while (count<countMaxSize);
     }
